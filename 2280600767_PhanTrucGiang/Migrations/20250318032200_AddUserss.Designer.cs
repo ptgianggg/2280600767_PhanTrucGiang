@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _2280600767_PhanTrucGiang.Models;
 
@@ -11,9 +12,10 @@ using _2280600767_PhanTrucGiang.Models;
 namespace _2280600767_PhanTrucGiang.Migrations
 {
     [DbContext(typeof(GiangDbContext))]
-    partial class GiangDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250318032200_AddUserss")]
+    partial class AddUserss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

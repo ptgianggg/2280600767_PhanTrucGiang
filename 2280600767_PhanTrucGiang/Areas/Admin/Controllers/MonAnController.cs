@@ -7,8 +7,10 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace _2280600767_PhanTrucGiang.Controllers
+namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class MonAnController : Controller
     {
         private readonly GiangDbContext _context;
