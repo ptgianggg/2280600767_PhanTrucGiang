@@ -3,10 +3,16 @@
 @{
     ViewData["Title"] = "DANH SÁCH MÓN ĂN";
 }
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <div class="container mt-4">
     <h2 class="text-center text-primary">Danh sách món ăn</h2>
-    <a asp-action="Create" class="btn btn-success mb-3">Thêm món ăn</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-area="Admin" asp-controller="MonAn" asp-action="Create" class="btn btn-success mb-3">Thêm món ăn</a>
+    }
 
     <table class="table table-hover table-bordered shadow-lg">
         <thead class="bg-primary text-white text-center">
@@ -16,7 +22,7 @@
                 <th>Loại Món Ăn</th>
                 <th>Đơn Giá</th>
                 <th>Số Lượng</th>
-              
+
             </tr>
         </thead>
         <tbody>
@@ -29,11 +35,14 @@
                     <td>@item.Dongia.ToString("N0") VNĐ</td>
                     <td>@item.Soluongton</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.MaMonAn" class="btn btn-warning btn-sm">Sửa</a>
-                        <a asp-action="Delete" asp-route-id="@item.MaMonAn" class="btn btn-danger btn-sm">Xóa</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-area="Admin" asp-controller="MonAn" asp-action="Edit" asp-route-id="@item.MaMonAn" class="btn btn-warning btn-sm">Sửa</a>
+                            <a asp-area="Admin" asp-controller="MonAn" asp-action="Delete" asp-route-id="@item.MaMonAn" class="btn btn-danger btn-sm">Xóa</a>
+                        }
                         <a asp-action="Display" asp-route-id="@item.MaMonAn" class="btn btn-info">Xem</a>
-
                     </td>
+
                 </tr>
             }
         </tbody>

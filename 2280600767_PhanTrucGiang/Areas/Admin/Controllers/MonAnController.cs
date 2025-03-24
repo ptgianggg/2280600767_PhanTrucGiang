@@ -23,6 +23,8 @@ namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
         public IActionResult Index()
         {
             var monAns = _context.MonAn.Include(m => m.LoaiMonAn).ToList();
+
+
             return View(monAns);
         }
 
