@@ -1,0 +1,57 @@
+﻿@model Order
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4 text-primary fw-bold">🛍️ Thanh Toán</h2>
+            <form asp-action="Checkout" method="post" class="shadow-lg p-4 bg-light rounded border">
+
+                <!-- Họ và tên -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">👤 Họ và Tên</label>
+                    <input type="text" name="FullName" class="form-control border-primary" placeholder="Nhập họ và tên..." required />
+                </div>
+
+                <!-- Số điện thoại -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">📞 Số Điện Thoại</label>
+                    <input type="tel" name="PhoneNumber" class="form-control border-primary" placeholder="Nhập số điện thoại..." required pattern="[0-9]{10,11}" title="Số điện thoại phải có 10-11 chữ số" />
+                </div>
+
+                <!-- Địa chỉ giao hàng -->
+                <div class="mb-3">
+                    <label asp-for="ShippingAddress" class="form-label fw-bold">📍 Địa Chỉ Giao Hàng</label>
+                    <input asp-for="ShippingAddress" class="form-control border-primary" placeholder="Nhập địa chỉ nhận hàng..." required />
+                </div>
+
+                <!-- Ghi chú -->
+                <div class="mb-3">
+                    <label asp-for="Notes" class="form-label fw-bold">📝 Ghi Chú</label>
+                    <textarea asp-for="Notes" class="form-control border-secondary" rows="3" placeholder="Ghi chú thêm cho đơn hàng (không bắt buộc)"></textarea>
+                </div>
+
+                <!-- Phương thức thanh toán -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">💳 Phương Thức Thanh Toán</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PaymentMethod" value="COD" checked>
+                        <label class="form-check-label">🚚 Thanh toán khi nhận hàng (COD)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PaymentMethod" value="BankTransfer">
+                        <label class="form-check-label">🏦 Chuyển khoản ngân hàng</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PaymentMethod" value="EWallet">
+                        <label class="form-check-label">📱 Ví điện tử (Momo, ZaloPay,...)</label>
+                    </div>
+                </div>
+
+                <!-- Nút đặt hàng -->
+                <button type="submit" class="btn btn-success w-100 fw-bold shadow-sm" style="font-size: 18px; transition: 0.3s;">
+                    🛒 Đặt Hàng Ngay
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

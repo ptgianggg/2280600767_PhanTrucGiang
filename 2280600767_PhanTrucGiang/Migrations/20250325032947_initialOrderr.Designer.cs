@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _2280600767_PhanTrucGiang.Models;
 
@@ -11,9 +12,10 @@ using _2280600767_PhanTrucGiang.Models;
 namespace _2280600767_PhanTrucGiang.Migrations
 {
     [DbContext(typeof(GiangDbContext))]
-    partial class GiangDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250325032947_initialOrderr")]
+    partial class initialOrderr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,9 +129,6 @@ namespace _2280600767_PhanTrucGiang.Migrations
                     b.Property<string>("MaLoaiMonAn")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("SoLuong")
-                        .HasColumnType("int");
 
                     b.Property<int>("Soluongton")
                         .HasColumnType("int");

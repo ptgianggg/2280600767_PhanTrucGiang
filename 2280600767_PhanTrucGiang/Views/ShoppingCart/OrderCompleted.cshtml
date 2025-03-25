@@ -1,0 +1,18 @@
+﻿@model int
+
+<div class="container mt-5 text-center">
+    <div class="alert alert-success shadow-lg p-4 rounded">
+        <h2 class="fw-bold text-success">🎉 Đặt Hàng Thành Công!</h2>
+        <p class="fs-5">Cảm ơn bạn đã đặt hàng! Mã đơn hàng của bạn là <strong>#@Model</strong>.</p>
+        <p>Chúng tôi sẽ xử lý đơn hàng của bạn trong thời gian sớm nhất.</p>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-lg btn-primary me-3">
+            🏠 Quay về Trang Chủ
+        </a>
+        <a asp-controller="Orders" asp-action="OrderHistory" class="btn btn-lg btn-outline-secondary">
+            📜 Xem Lịch Sử Đơn Hàng
+        </a>
+    </div>
+</div>

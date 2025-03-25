@@ -1,57 +1,50 @@
 ﻿using _2280600767_PhanTrucGiang.Models;
+using _2280600767_PhanTrucGiang.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace _2280600767_PhanTrucGiang.Repositories
+public class MonAnRepository : IMonAnRepository
 {
-    public class MonAnRepository : IMonAnRepository
+    private readonly GiangDbContext _context;
 
+    public MonAnRepository(GiangDbContext context)
     {
-        private readonly GiangDbContext _dbContext;
+        _context = context;
+    }
 
-        public MonAnRepository(GiangDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public async Task<IEnumerable<MonAn>> GetAllAsync()
+    {
+        return await _context.MonAn.Include(m => m.LoaiMonAn).ToListAsync();
+    }
 
-        public List<MonAn> LayDSMonAn()
-        {
-            List<MonAn> dsMonAn = _dbContext.MonAn.ToList();
-            return dsMonAn;
-        }
+    public async Task<MonAn> GetByIdAsync(string id) // Thay đổi kiểu dữ liệu của id thành string
+    {
+        return await _context.MonAn.FindAsync(id);
+    }
 
-        public List<MonAn> SuaMonAn(MonAn monAn)
-        {
-            var ma = _dbContext.MonAn.Find(monAn.MaMonAn);
+    public List<MonAn> LayDSMonAn()
+    {
+        return _context.MonAn.ToList();
+    }
 
-            if (ma != null)
-            {
-                ma.TenMonAn = monAn.TenMonAn;
-                ma.Soluongton = monAn.Soluongton;
-                ma.Dongia = monAn.Dongia;
-                _dbContext.Entry(ma).State = EntityState.Modified;
-                _dbContext.SaveChanges();
-            }
+    public List<MonAn> SuaMonAn(MonAn monAn)
+    {
+        _context.MonAn.Update(monAn);
+        _context.SaveChanges();
+        return _context.MonAn.ToList();
+    }
 
-            return _dbContext.MonAn.ToList();
-        }
+    public List<MonAn> ThemMonAn(MonAn monAn)
+    {
+        _context.MonAn.Add(monAn);
+        _context.SaveChanges();
+        return _context.MonAn.ToList();
+    }
 
-        public List<MonAn> ThemMonAn(MonAn monAn)
-        {
-            _dbContext.Add(monAn);
-            _dbContext.SaveChanges();
-            return _dbContext.MonAn.ToList();
-        }
-
-        public List<MonAn> XoaMonAn(MonAn monAn)
-        {
-            _dbContext.MonAn.Remove(monAn);
-            _dbContext.SaveChanges();
-            return _dbContext.MonAn.ToList();
-        }
-
+    public List<MonAn> XoaMonAn(MonAn monAn)
+    {
+        _context.MonAn.Remove(monAn);
+        _context.SaveChanges();
+        return _context.MonAn.ToList();
     }
 }
-
-
-
 

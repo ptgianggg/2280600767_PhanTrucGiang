@@ -1,16 +1,16 @@
-﻿using _2280600767_PhanTrucGiang.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.IO;
-using System.Linq;
 
-namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
+using Microsoft.EntityFrameworkCore;
+using _2280600767_PhanTrucGiang.Models;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO;
+
+namespace _2280600767_PhanTrucGiang.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+    [Authorize(Roles = SD.Role_Admin)] 
     public class MonAnController : Controller
     {
         private readonly GiangDbContext _context;
@@ -20,31 +20,29 @@ namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
             _context = context;
         }
 
+     
         public IActionResult Index()
         {
             var monAns = _context.MonAn.Include(m => m.LoaiMonAn).ToList();
-
-
             return View(monAns);
         }
 
+    
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult Create()
         {
             ViewBag.MaLoaiMonAn = new SelectList(_context.LoaiMonAn, "MaLoaiMonAn", "TenLoaiMonAn");
             return View();
         }
 
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult Create(MonAn monAn, IFormFile imageFile)
         {
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                foreach (var error in errors)
-                {
-                    Console.WriteLine(error);
-                }
                 ViewBag.MaLoaiMonAn = new SelectList(_context.LoaiMonAn, "MaLoaiMonAn", "TenLoaiMonAn");
                 return View(monAn);
             }
@@ -71,26 +69,18 @@ namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
                 }
 
                 _context.MonAn.Add(monAn);
-                int result = _context.SaveChanges();
-
-                if (result > 0)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Không thể lưu món ăn vào database.");
-                    return View(monAn);
-                }
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi thêm món ăn: " + ex.Message);
                 ModelState.AddModelError("", "Lỗi khi thêm món ăn: " + ex.Message);
                 return View(monAn);
             }
         }
 
+     
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult Edit(string id)
         {
             var monAn = _context.MonAn.Find(id);
@@ -105,6 +95,7 @@ namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult Edit(string id, MonAn monAn)
         {
             if (id != monAn.MaMonAn)
@@ -122,6 +113,8 @@ namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
             return View(monAn);
         }
 
+        // Hiển thị trang xác nhận xóa món ăn
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult Delete(string id)
         {
             var monAn = _context.MonAn.Find(id);
@@ -132,8 +125,10 @@ namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
             return View(monAn);
         }
 
+        // Xử lý xóa món ăn
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult DeleteConfirmed(string id)
         {
             var monAn = _context.MonAn.Find(id);
@@ -145,15 +140,24 @@ namespace _2280600767_PhanTrucGiang.Areas.Admin.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Hiển thị thông tin món ăn cho tất cả người dùng
+        [AllowAnonymous]
         public IActionResult Display(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
             var monAn = _context.MonAn
-                                .Include(m => m.LoaiMonAn)
-                                .FirstOrDefault(m => m.MaMonAn == id);
+                .Include(m => m.LoaiMonAn)
+                .FirstOrDefault(m => m.MaMonAn == id);
+
             if (monAn == null)
             {
                 return NotFound();
             }
+
             return View(monAn);
         }
     }

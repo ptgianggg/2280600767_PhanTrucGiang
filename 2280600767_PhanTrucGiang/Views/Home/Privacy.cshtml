@@ -1,6 +1,73 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Chính Sách Bảo Mật";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container mt-5">
+    <h1 class="text-primary text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p class="lead text-muted">
+                Chúng tôi cam kết bảo vệ quyền riêng tư của bạn. Dưới đây là những thông tin về cách chúng tôi thu thập, sử dụng và bảo vệ dữ liệu cá nhân của bạn.
+            </p>
+
+            <div class="accordion" id="privacyPolicy">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            1. Thu thập thông tin
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#privacyPolicy">
+                        <div class="accordion-body">
+                            Chúng tôi có thể thu thập thông tin cá nhân của bạn như họ tên, email, số điện thoại khi bạn đăng ký tài khoản hoặc đặt hàng trên trang web.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            2. Sử dụng thông tin
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#privacyPolicy">
+                        <div class="accordion-body">
+                            Thông tin cá nhân của bạn được sử dụng để xử lý đơn hàng, hỗ trợ khách hàng và cải thiện chất lượng dịch vụ.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            3. Bảo vệ dữ liệu
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#privacyPolicy">
+                        <div class="accordion-body">
+                            Chúng tôi sử dụng các biện pháp bảo mật để đảm bảo rằng thông tin cá nhân của bạn không bị truy cập trái phép.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            4. Quyền lợi của bạn
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#privacyPolicy">
+                        <div class="accordion-body">
+                            Bạn có quyền yêu cầu truy cập, chỉnh sửa hoặc xóa thông tin cá nhân của mình bằng cách liên hệ với chúng tôi.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info text-center mt-4">
+                <p class="mb-0">Nếu bạn có bất kỳ câu hỏi nào về chính sách bảo mật, vui lòng liên hệ với chúng tôi qua email hỗ trợ.</p>
+            </div>
+        </div>
+    </div>
+</div>

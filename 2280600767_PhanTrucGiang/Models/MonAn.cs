@@ -10,7 +10,8 @@ namespace _2280600767_PhanTrucGiang.Models
         [StringLength(20)]
         public string? MaMonAn { get; set; }
 
-       
+
+
         [StringLength(250)]
         public string? TenMonAn { get; set; }
 
@@ -24,5 +25,6 @@ namespace _2280600767_PhanTrucGiang.Models
         public string? MaLoaiMonAn { get; set; }
         [ForeignKey("MaLoaiMonAn")]
         public LoaiMonAn? LoaiMonAn { get; set; }
+      
     }
 }
